@@ -1,0 +1,5 @@
+The orignial creator of the CGGE2 project is John Zimmermann.
+
+You are allowed to use and edit it freely, but you have to give credit.
+
+The project contains all the files that are located in the de.cg.cgge.* packages and the documentation file.

@@ -1,0 +1,13 @@
+.idea/
+.settings/
+.vscode/
+rsc/
+target/
+
+*.classpath
+*.project
+todo.txt
+update.txt
+*.iml
+*.pdf
+pom.xml
