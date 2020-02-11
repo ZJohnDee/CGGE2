@@ -37,4 +37,13 @@ public class KeyManager implements KeyListener {
         keys[e.getKeyCode()] = false;
     }
 
+    /**
+     * Checks, whether a key was pressed or not.
+     * @param keyCode The key code of the key to be checked
+     * @return Returns the boolean value of the key
+     */
+    public boolean checkKey(int keyCode) {
+        return keys[keyCode];
+    }
+
 }
