@@ -10,13 +10,13 @@ import javax.imageio.ImageIO;
 
 public class AnimatedSprite {
 
-    int width, height, rotation, length;
-    int centerX = 0, centerY = 0;
-    int currentFrame = 0;
+    private int width, height, rotation, length;
+    private int centerX = 0, centerY = 0;
+    private int currentFrame = 0;
 
-    int animationInterval = 0;
-    int animationRangeA = 0;
-    int animationRangeB = 0;
+    private int animationInterval = 0;
+    private int animationRangeA = 0;
+    private int animationRangeB = 0;
 
     private String[] paths;
     private BufferedImage[] imgs;
@@ -27,7 +27,7 @@ public class AnimatedSprite {
      * This creates an AnimatedSprite.
      * An AnimatedSprite cycles through all the images given at a specific rate to simualte motion
      * @param height The height, the image should be drawn at
-     * @param width The widht, the image should be drawn at
+     * @param width The width, the image should be drawn at
      * @param rotation The rotation of the image
      * @param paths The paths of all the images; They NOT are loaded into memory at that point
      */
@@ -38,9 +38,7 @@ public class AnimatedSprite {
         
         this.paths = new String[paths.length];
 
-        for (int i = 0; i < paths.length; i++) {
-            this.paths[i] = paths[i];
-        }
+        System.arraycopy(paths, 0, this.paths, 0, paths.length);
 
         length = paths.length;
 

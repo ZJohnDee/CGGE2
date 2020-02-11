@@ -8,10 +8,16 @@ import de.cg.cgge.gui.Drawer;
 
 public class KeyManager implements KeyListener {
 
-    private Drawer drawer; 
+    private Drawer drawer;
+
+    private boolean[] keys = new boolean[526];
 
     public KeyManager(Drawer drawer) {
-        this.drawer = drawer; 
+        this.drawer = drawer;
+
+        for (int i = 0; i < keys.length; i++) {
+            keys[i] = false;
+        }
     }
 
     @Override
@@ -23,17 +29,12 @@ public class KeyManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        for (GameObject obj : drawer.getRoom().getObjectManager().getObjects()) {
-            obj.keyPressed(e);
-        }
-
+        keys[e.getKeyCode()] = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        for (GameObject obj : drawer.getRoom().getObjectManager().getObjects()) {
-            obj.keyReleased(e);
-        }
+        keys[e.getKeyCode()] = false;
     }
 
 }

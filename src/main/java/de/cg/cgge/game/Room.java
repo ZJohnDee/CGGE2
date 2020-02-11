@@ -1,6 +1,7 @@
 package de.cg.cgge.game;
 
 import de.cg.cgge.ctrl.Clock;
+import de.cg.cgge.io.KeyManager;
 import de.cg.cgge.tilemaps.TileMap;
 
 public class Room {
@@ -74,5 +75,7 @@ public class Room {
         this.clock = clock; 
     } 
 
-    
+    public KeyManager getKeyManager() {
+        return getGameInstance().getDrawer().getWindow().getKeyManger();
+    }
 }

@@ -13,6 +13,8 @@ import java.awt.*;
 public class Window extends JFrame {
     private static final long serialVersionUID = 1L;
 
+    private KeyManager keyManager;
+
     private boolean isFullScreen;
 
     private Drawer drawer;
@@ -34,10 +36,10 @@ public class Window extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         //Creating the draw panel
+        keyManager = new KeyManager(drawer);
         drawPanel.setBounds(0, 0, drawer.getGameInstance().getWidth(), drawer.getGameInstance().getHeight());
-        drawPanel.addKeyListener(new KeyManager(drawer));
+        drawPanel.addKeyListener(keyManager);
         drawPanel.addMouseListener(new MouseManager(drawer));
-
 
         //Focusing and adding the draw panel
         drawPanel.setFocusable(true);
@@ -61,7 +63,7 @@ public class Window extends JFrame {
 
     /**
      * Switches between screen modes.
-     * @return Wether it's in full screen mode or not
+     * @return Whether it's in full screen mode or not
      */
     public boolean switchFullScreen() {
 
@@ -83,6 +85,10 @@ public class Window extends JFrame {
 
 
         return isFullScreen;
+    }
+
+    public KeyManager getKeyManger() {
+        return this.keyManager;
     }
 
 }

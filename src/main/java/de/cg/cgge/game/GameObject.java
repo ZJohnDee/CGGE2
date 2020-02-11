@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import de.cg.cgge.physics.Physics;
 
-public abstract class GameObject {
+public class GameObject {
 
     protected boolean visible = true;
     protected boolean solid = true; 
@@ -32,61 +32,69 @@ public abstract class GameObject {
     /**
      * Called on object creation (The point, the object is added to the object list)
      */
-    protected abstract void create();
+    protected void create() {
+
+    }
 
     /**
      * Is called every tick, before all the step methods are called
      * Is here for game logic, that needs to be executed in the beginning of every tick
      */
-    public abstract void preStep(); 
+    public void preStep() {
+
+    }
 
     /**
      * Is called every tick. Is here for game logic
      */
-    public abstract void step();
+    public void step() {
+
+    }
 
     /**
      * Is drawn in the middle of every tick
      * Is drawn between tile map layers 2 and 3
      * @param g The Graphics element of the JPanel
      */
-    public abstract void draw(Graphics g);
+    public void draw(Graphics g) {
+
+    }
     
     /**
      * Is drawn at the end of the tick
      * @param g The Graphics element of the JPanel
      */
-    public abstract void postDraw(Graphics g);
+    public void postDraw(Graphics g) {
+
+    }
 
     /**
      * @param e Event thats called, when mouse is clicked
      */
-    public abstract void mouseClicked(MouseEvent e);
+    public void mouseClicked(MouseEvent e) {
+
+    }
 
     /**
      * @param e Event thats called, when mouse is pressed
      */
-    public abstract void mousePressed(MouseEvent e); 
+    public void mousePressed(MouseEvent e) {
+
+    }
 
     /**
      * @param e Event thats called, when mouse is pressed
      */
-    public abstract void mouseReleased(MouseEvent e); 
+    public void mouseReleased(MouseEvent e) {
 
-    /**
-     * @param e Event thats called, when key is pressed
-     */
-    public abstract void keyPressed(KeyEvent e);
-
-    /**
-     * @param e Event thats called when key is released
-     */
-    public abstract void keyReleased(KeyEvent e); 
+    }
 
     /**
      * @param e Event thats called when key is typed
      */
-    public abstract void keyTyped(KeyEvent e); 
+    public void keyTyped(KeyEvent e) {
+
+    }
 
     /**
      * Destroys the object and removes it from the object manager
