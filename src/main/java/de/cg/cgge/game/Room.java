@@ -78,4 +78,8 @@ public class Room {
     public KeyManager getKeyManager() {
         return getGameInstance().getDrawer().getWindow().getKeyManger();
     }
+
+    public void setCamera(Camera camera) {
+        this.camera = camera;
+    }
 }

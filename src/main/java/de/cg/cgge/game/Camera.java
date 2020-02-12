@@ -2,17 +2,17 @@ package de.cg.cgge.game;
 
 public class Camera {
 
-    private int xpos = 0;
-    private int ypos = 0;
-    private int xpadding = 150;
-    private int ypadding = 100;
-    private int camSpeed = 5; 
+    protected int xpos = 0;
+    protected int ypos = 0;
+    protected int xpadding = 150;
+    protected int ypadding = 100;
+    protected int camSpeed = 5;
 
-    private double zoom = 1;
+    protected double zoom = 1;
 
-    private GameObject toFollow;
+    protected GameObject toFollow;
 
-    private Room room; 
+    protected Room room;
 
 
     /**
