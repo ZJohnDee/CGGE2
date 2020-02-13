@@ -118,7 +118,7 @@ public class CameraRenderer {
      */
     public void drawLine(int x1, int y1, int x2, int y2) {
         int w = x2-x1; 
-        int h = y2-y2; 
+        int h = y2-y1;
 
         if (cam.isInView(w, h, w, h)) {
             g.drawLine(x1, y1, x2, y2);
