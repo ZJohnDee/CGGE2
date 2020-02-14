@@ -43,10 +43,10 @@ public class Sprite  {
 
     /**
      * Resets the dimensions of the sprite
-     * @param height The height of the sprite
-     * @param width The width of the sprite
+     * @param width The height of the sprite
+     * @param height The width of the sprite
      */
-    public void setDimensions(int height, int width) {
+    public void setDimensions(int width, int height) {
         this.height = height; 
         this.width = width; 
     }
