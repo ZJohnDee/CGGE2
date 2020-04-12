@@ -34,4 +34,19 @@ public class MouseHelper {
         return (int)info.getLocation().getY()-(int)game.getDrawer().getWindow().getBounds().getY();
     }
 
+
+    /**
+     * @param x Upper left corner of section
+     * @param y Upper left corner of section
+     * @param w Width of section
+     * @param h Height of section
+     * @return If mouse is in given section, it returns true
+     */
+    public boolean inMouseRange(int x, int y, int w, int h) {
+        final int mx = getMouseX();
+        final int my = getMouseY();
+
+        return (mx > x && mx < x+w && my > y && my < y+h);
+    }
+
 }
