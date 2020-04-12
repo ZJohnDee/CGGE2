@@ -146,12 +146,21 @@ public class Camera {
      * @return When the given arguments are in view of the camera, true is being returned
      */
     public boolean isInView(int x, int y, int w, int h) {
-        
-        if ( (x+w-xpos > 0) && (x-Math.abs(xpos) <= room.getGameInstance().getWidth()) && ( y+h-ypos >= 0) && (y-Math.abs(ypos) <= room.getGameInstance().getHeight()))  {
-            return true; 
-        }
 
-        return false; 
+        return true;
+
+        /*
+        // If one rectangle is on left side of other
+        if (x > this.xpos+room.getGameInstance().getWidth() || this.xpos > x+w)
+            return false;
+
+        // If one rectangle is above other
+        if (y < this.ypos+room.getGameInstance().getHeight() || this.ypos < y+h)
+            return false;
+
+        return true;
+        */
+
     }
 
 }

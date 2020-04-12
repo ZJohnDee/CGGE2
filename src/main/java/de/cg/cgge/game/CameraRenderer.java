@@ -31,8 +31,8 @@ public class CameraRenderer {
      */
     public void fillRect(int x, int y, int w, int h) {
 
-        int nx = (int) (x-cam.getX()*cam.getZoom());
-        int ny = (int) (y-cam.getY()*cam.getZoom());
+        int nx = (int) ((x-cam.getX())*cam.getZoom());
+        int ny = (int) ((y-cam.getY())*cam.getZoom());
 
         if (cam.isInView(x, y, w, h))
             g.fillRect(nx, ny, (int) (w*cam.getZoom()), (int) (h*cam.getZoom()));
@@ -47,8 +47,8 @@ public class CameraRenderer {
      */
     public void drawRect(int x, int y, int w, int h) {
 
-        int nx = (int) (x-cam.getX()*cam.getZoom());
-        int ny = (int) (y-cam.getY()*cam.getZoom());
+        int nx = (int) ((x-cam.getX())*cam.getZoom());
+        int ny = (int) ((y-cam.getY())*cam.getZoom());
 
         if (cam.isInView(x, y, w, h)) 
             g.drawRect(nx, ny, (int) (w*cam.getZoom()), (int) (h*cam.getZoom()));
@@ -61,12 +61,16 @@ public class CameraRenderer {
      * @param y The y position
      */
     public void drawImage(Image img, int x, int y) {
+
+        int nx = (int) x-cam.getX();
+        int ny = (int) y-cam.getY();
+
         if (cam.getZoom() != 1) {
             img = img.getScaledInstance((int) (img.getWidth(null)*cam.getZoom()), (int) (img.getHeight(null)*cam.getZoom()), Image.SCALE_REPLICATE);
         }
 
-        if (cam.isInView(x, y, img.getWidth(null), img.getHeight(null))) 
-            g.drawImage(img, (int) (x-cam.getX()), (int) (y-cam.getY()), null);
+        if (cam.isInView(nx, ny, img.getWidth(null), img.getHeight(null)))
+            g.drawImage(img, nx, ny, null);
     }
 
     /**
@@ -76,9 +80,12 @@ public class CameraRenderer {
      * @param y The y-Position
      */
     public void drawString(String str, int x, int y) {
+        int nx = (int) ((x-cam.getX())*cam.getZoom());
+        int ny = (int) ((y-cam.getY())*cam.getZoom());
+
         int height = (int) g.getFontMetrics().getLineMetrics(str, g).getHeight();
-        if (cam.isInView(x, y, 1080, height)) {
-            g.drawString(str, x, y);
+        if (cam.isInView(nx, ny, 1080, height)) {
+            g.drawString(str, nx, ny);
         }
     }
 
@@ -89,8 +96,8 @@ public class CameraRenderer {
      * @param y The y-Position of the sprite
      */
     public void drawSprite(Sprite sprite, int x, int y) {
-        int nx = (int) (x-cam.getX());
-        int ny = (int) (y-cam.getY());
+        int nx = (int) ((x-cam.getX())*cam.getZoom());
+        int ny = (int) ((y-cam.getY())*cam.getZoom());
 
         if (cam.isInView(nx, ny, sprite.getWidth(), sprite.getHeight()))
             sprite.draw(nx, ny, g);
@@ -103,8 +110,8 @@ public class CameraRenderer {
      * @param y The y-Position, which is adjusted and then parsed to the AnimatedSprite.draw(x,y,g) method
      */
     public void drawAnimatedSprite(AnimatedSprite sprite, int x, int y) {
-        int nx = (int) (x-cam.getX());
-        int ny = (int) (y-cam.getY());
+        int nx = (int) ((x-cam.getX())*cam.getZoom());
+        int ny = (int) ((y-cam.getY())*cam.getZoom());
 
         if (cam.isInView(nx, ny, sprite.getWidth(), sprite.getHeight()))
             sprite.draw(nx, ny, g);
@@ -120,8 +127,14 @@ public class CameraRenderer {
         int w = x2-x1; 
         int h = y2-y1;
 
+        int nx1 = (int) ((x1-cam.getX())*cam.getZoom());
+        int ny1 = (int) ((y1-cam.getY())*cam.getZoom());
+
+        int nx2 = (int) ((x2-cam.getX())*cam.getZoom());
+        int ny2 = (int) ((y2-cam.getY())*cam.getZoom());
+
         if (cam.isInView(w, h, w, h)) {
-            g.drawLine(x1, y1, x2, y2);
+            g.drawLine(nx1, ny1, nx2, ny2);
         }
     }
 
@@ -131,7 +144,7 @@ public class CameraRenderer {
      * @return Returns an adjusted value
      */
     public int getAdjustedX(int x) {
-        return x-cam.getX(); 
+        return (int) ((x-cam.getX())*cam.getZoom());
     }
 
     /**
@@ -140,10 +153,7 @@ public class CameraRenderer {
      * @return Returns an adjusted value
      */
     public int getAdjustedY(int y) {
-        return y-cam.getY();
+        return (int) ((y-cam.getY())*cam.getZoom());
     }
-
-
-    
 
 }
