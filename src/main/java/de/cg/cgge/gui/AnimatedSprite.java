@@ -18,6 +18,9 @@ public class AnimatedSprite {
     private int animationRangeA = 0;
     private int animationRangeB = 0;
 
+    private boolean running = false;
+    private boolean ranOnce = false;
+
     private String[] paths;
     private BufferedImage[] imgs;
 
@@ -63,25 +66,23 @@ public class AnimatedSprite {
     }
 
     private Thread initThread() {
-        Thread thread = new Thread(new Runnable() {
+        return new Thread(() -> {
+            ranOnce = true;
+            int start = getAnimationRangeA();
+            int end = getAnimationRangeB();
+            int currentFrame = start;
 
-            @Override
-            public void run() {
-                int start = getAnimationRangeA(); 
-                int end = getAnimationRangeB();
-                int currentFrame = start; 
-
-                while (true) {
-                    
+            while (true) {
+                if (running) {
                     //Reset animation
                     if (currentFrame > end) {
-                       currentFrame = start;  
+                        currentFrame = start;
                     }
 
 
                     setCurrentFrame(currentFrame);
 
-                    currentFrame++; 
+                    currentFrame++;
 
 
                     try {
@@ -92,8 +93,6 @@ public class AnimatedSprite {
                 }
             }
         });
-
-        return thread; 
     }
 
     /**
@@ -119,7 +118,7 @@ public class AnimatedSprite {
      */
     public void draw(int x, int y, float zoom,  Graphics g) {
         if (rotation == 0) {
-            g.drawImage((Image) imgs[currentFrame], x, y, (int)(zoom*width), (int)(height), null);
+            g.drawImage(imgs[currentFrame], x, y, (int)(zoom*width), (int)(zoom*height), null);
         } else {
             AffineTransform at = AffineTransform.getTranslateInstance(x, y); 
             at.rotate(Math.toRadians(rotation), centerX, centerY);
@@ -145,16 +144,15 @@ public class AnimatedSprite {
         animationRangeA = start; 
         animationRangeB = end; 
 
-        thread.start();
+        if (!ranOnce) thread.start();
+        else          running = true;
     }
 
     /**
      * Stops the animation
      */
     public void stopAnimation() {
-        if (thread.isAlive()) {
-            thread.stop();
-        }
+        running = false;
     }  
 
     public void setWidth(int width) {
