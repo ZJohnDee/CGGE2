@@ -117,16 +117,21 @@ public class AnimatedSprite {
      * @param y y-Position
      * @param g Graphics instance
      */
-    public void draw(int x, int y, Graphics g) {
+    public void draw(int x, int y, float zoom,  Graphics g) {
         if (rotation == 0) {
-            g.drawImage((Image) imgs[currentFrame], x, y, width, height, null);
+            g.drawImage((Image) imgs[currentFrame], x, y, (int)(zoom*width), (int)(height), null);
         } else {
             AffineTransform at = AffineTransform.getTranslateInstance(x, y); 
             at.rotate(Math.toRadians(rotation), centerX, centerY);
+            at.setToScale(zoom, zoom);
             Graphics2D g2d = (Graphics2D) g; 
 
             g2d.drawImage(imgs[currentFrame], at, null); 
         }
+    }
+
+    public void draw(int x, int y, Graphics g) {
+        draw(x, y, 1f, g);
     }
 
     /**

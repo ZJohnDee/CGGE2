@@ -74,16 +74,21 @@ public class Sprite  {
      * @param y The y-Postion
      * @param g The graphics instance
      */
-    public void draw(int x, int y, Graphics g) {
+    public void draw(int x, int y, float zoom,  Graphics g) {
         if (rotation == 0) {
-            g.drawImage((Image)img, x, y, width, height, null);
+            g.drawImage((Image)img, x, y, (int)(width*zoom), (int)(height*zoom), null);
         } else {
             AffineTransform at = AffineTransform.getTranslateInstance(x, y); 
             at.rotate(Math.toRadians(rotation+baseRotation), centerX, centerY);
-            Graphics2D g2d = (Graphics2D) g; 
+            at.setToScale(zoom, zoom);
+            Graphics2D g2d = (Graphics2D) g;
 
-            g2d.drawImage(img, at, null); 
+            g2d.drawImage(img, at, null);
         }
+    }
+
+    public void draw(int x, int y, Graphics g) {
+        draw(x,y,1f, g);
     }
 
     public int getRotation() {
