@@ -8,7 +8,7 @@ public class Camera {
     protected int ypadding = 100;
     protected int camSpeed = 5;
 
-    protected double zoom = 1;
+    protected float zoom = 1;
 
     protected GameObject toFollow;
 
@@ -101,7 +101,7 @@ public class Camera {
      * The camera zooms into the objects on screen
      * @param zoom The zoom factor
      */
-    public void setZoom(double zoom) {
+    public void setZoom(float zoom) {
         this.zoom = zoom;
     }
 
@@ -147,19 +147,10 @@ public class Camera {
      */
     public boolean isInView(int x, int y, int w, int h) {
 
-        return true;
-
-        /*
-        // If one rectangle is on left side of other
-        if (x > this.xpos+room.getGameInstance().getWidth() || this.xpos > x+w)
-            return false;
-
-        // If one rectangle is above other
-        if (y < this.ypos+room.getGameInstance().getHeight() || this.ypos < y+h)
-            return false;
+        if (x+w < this.xpos || x > this.xpos+room.getGameInstance().getWidth()) return false;
+        if (y+h < this.ypos || y > this.ypos+room.getGameInstance().getHeight()) return false;
 
         return true;
-        */
 
     }
 

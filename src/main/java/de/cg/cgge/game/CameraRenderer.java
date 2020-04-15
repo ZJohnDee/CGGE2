@@ -34,8 +34,11 @@ public class CameraRenderer {
         int nx = (int) ((x-cam.getX())*cam.getZoom());
         int ny = (int) ((y-cam.getY())*cam.getZoom());
 
-        if (cam.isInView(x, y, w, h))
-            g.fillRect(nx, ny, (int) (w*cam.getZoom()), (int) (h*cam.getZoom()));
+        int nw = (int) (w*cam.getZoom());
+        int nh = (int) (h*cam.getZoom());
+
+        if (cam.isInView(x, y, nw, nh))
+            g.fillRect(nx, ny, nw, nh);
     }
 
     /**
@@ -50,8 +53,11 @@ public class CameraRenderer {
         int nx = (int) ((x-cam.getX())*cam.getZoom());
         int ny = (int) ((y-cam.getY())*cam.getZoom());
 
-        if (cam.isInView(x, y, w, h)) 
-            g.drawRect(nx, ny, (int) (w*cam.getZoom()), (int) (h*cam.getZoom()));
+        int nw = (int) (w*cam.getZoom());
+        int nh = (int) (h*cam.getZoom());
+
+        if (cam.isInView(x, y, nw, nh))
+            g.drawRect(nx, ny, nw, nh);
     }
 
     /**
@@ -99,7 +105,10 @@ public class CameraRenderer {
         int nx = (int) ((x-cam.getX())*cam.getZoom());
         int ny = (int) ((y-cam.getY())*cam.getZoom());
 
-        if (cam.isInView(nx, ny, sprite.getWidth(), sprite.getHeight()))
+        int nw = (int) (sprite.getWidth()*cam.getZoom());
+        int nh = (int) (sprite.getHeight()*cam.getZoom());
+
+        if (cam.isInView(nx, ny, nw, nh))
             sprite.draw(nx, ny, g);
     }
 
@@ -113,7 +122,10 @@ public class CameraRenderer {
         int nx = (int) ((x-cam.getX())*cam.getZoom());
         int ny = (int) ((y-cam.getY())*cam.getZoom());
 
-        if (cam.isInView(nx, ny, sprite.getWidth(), sprite.getHeight()))
+        int nw = (int) (sprite.getWidth()*cam.getZoom());
+        int nh = (int) (sprite.getHeight()*cam.getZoom());
+
+        if (cam.isInView(nx, ny, nw, nh))
             sprite.draw(nx, ny, g);
     }
 
@@ -124,14 +136,15 @@ public class CameraRenderer {
      * @param y2 The second y-Position
      */
     public void drawLine(int x1, int y1, int x2, int y2) {
-        int w = x2-x1; 
-        int h = y2-y1;
 
         int nx1 = (int) ((x1-cam.getX())*cam.getZoom());
         int ny1 = (int) ((y1-cam.getY())*cam.getZoom());
 
         int nx2 = (int) ((x2-cam.getX())*cam.getZoom());
         int ny2 = (int) ((y2-cam.getY())*cam.getZoom());
+
+        int w = nx2-nx1;
+        int h = ny2-ny1;
 
         if (cam.isInView(w, h, w, h)) {
             g.drawLine(nx1, ny1, nx2, ny2);
