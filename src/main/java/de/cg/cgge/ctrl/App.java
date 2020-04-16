@@ -12,34 +12,25 @@ import java.awt.*;
 
 public class App {
 
-    public static Sprite sprite = new Sprite("rsc//player1.png", 50, 50, 0);
+    public static String release = "pre-1.0-b6";
+
+    public static boolean package_uiplus = false;
 
     public static void main(String[] args) {
-        GameInstance game = new GameInstance();
+        if (args.length == 0) {
+            System.out.println("CGGE2 Game Engine");
+            System.out.println("Current Version: " + release);
+        }
 
-        GameObject obj = new GameObject(game.getRoom()) {
-
-            @Override
-            public void create() {
-                this.x = 20;
-                this.y = 20;
-                this.w = 20;
-                this.h = 20;
-
-                game.getRoom().getCamera().setZoom(5f);
-            }
-            @Override
-            public void step() {
-                x+=2;
+        if (args.length == 1) {
+            if (args[0].equals("test")) {
+                System.out.println("Test Launched");
+                new GameInstance();
             }
 
-            @Override
-            public void draw(Graphics g) {
-                CameraRenderer cr = new CameraRenderer(g, room.getCamera());
-
-                cr.drawSprite(sprite, (int) x+20, 100);
-                cr.drawSprite(sprite, (int) x+200, 100);
+            if (args[0].equals("packages")) {
+                System.out.println("UIPlus: " + package_uiplus);
             }
-        };
+        }
     }
 }
