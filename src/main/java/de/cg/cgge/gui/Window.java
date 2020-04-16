@@ -27,7 +27,7 @@ public class Window extends JFrame {
         
         //Setting up basic settings
         drawPanel = new DrawPanel(drawer); 
-        setUndecorated(drawer.getGameInstance().isTaskbarActive());
+        setUndecorated(!drawer.getGameInstance().isTaskbarActive());
         setResizable(true);
         setVisible(true);
         setFocusable(false);
