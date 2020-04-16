@@ -23,9 +23,18 @@ public abstract class Physics {
      * @param game The GameInstance, it is running on
      * @return Adjusted delta time
      */
-    public static float deltaTime(GameInstance game) {
-        return ((float)game.getDrawer().getRoom().getClock().deltaTime); 
+    public static float AdjustedDeltaTime(GameInstance game) {
+        return ((float)game.getDrawer().getRoom().getClock().adjustedDeltaTime);
     }
 
+    /**
+     * Returns the delta time of the last frame.
+     * The time difference between each frame
+     * @param game The GameInstance, it is running on
+     * @return Delta Time
+     */
+    public static float DeltaTime(GameInstance game) {
+        return ((float)game.getDrawer().getRoom().getClock().deltaTime);
+    }
     
 }

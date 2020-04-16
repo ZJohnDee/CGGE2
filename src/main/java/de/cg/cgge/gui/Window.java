@@ -27,7 +27,7 @@ public class Window extends JFrame {
         
         //Setting up basic settings
         drawPanel = new DrawPanel(drawer); 
-        setUndecorated(true);
+        setUndecorated(drawer.getGameInstance().isTaskbarActive());
         setResizable(true);
         setVisible(true);
         setFocusable(false);
@@ -66,6 +66,11 @@ public class Window extends JFrame {
      * @return Whether it's in full screen mode or not
      */
     public boolean switchFullScreen() {
+
+        if (drawer.getGameInstance().isTaskbarActive()) {
+            throw new IllegalStateException("Tried to change full screen mode of window with activated Task Bar");
+        }
+
 
         if (!isFullScreen) {
             GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();

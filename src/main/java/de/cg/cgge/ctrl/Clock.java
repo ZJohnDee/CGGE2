@@ -12,7 +12,8 @@ public class Clock extends Thread {
     protected boolean running = false;
     protected boolean ranOnce = false;
 
-    public double deltaTime = 0; 
+    public double adjustedDeltaTime = 0;
+    public double deltaTime = 0;
 
     /**
      * Initializes the main clock of the game.
@@ -38,22 +39,25 @@ public class Clock extends Thread {
 
         game.getDrawer().setStartTime(System.currentTimeMillis()/1000);
 
-        final double FPS = game.getFramerate();
+        final double FPS = game.getTargetFramerate();
         long lastTime = System.nanoTime(); 
         double neededTime = 1000000000/FPS; 
-        double deltaTime = 0; 
-
+        double deltaTime = 0;
+        long timeDifference = 0;
         //Main loop
         while(running) {
-            long currentTime = System.nanoTime(); 
-            deltaTime += (currentTime - lastTime) / neededTime;
-            lastTime = currentTime; 
+            long currentTime = System.nanoTime();
+            timeDifference = currentTime - lastTime;
+            deltaTime += timeDifference / neededTime;
 
             if (deltaTime >= 1) {
-                this.deltaTime = deltaTime; 
+                this.adjustedDeltaTime = deltaTime;
+                this.deltaTime = timeDifference;
                 deltaTime -= 1; 
                 clockAction();
             }
+
+            lastTime = currentTime;
         }
 
         this.stop(); 

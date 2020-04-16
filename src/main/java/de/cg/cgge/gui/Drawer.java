@@ -100,8 +100,8 @@ public class Drawer {
             passedFrames = 0; 
         }
 
-        if (avg >= game.getFramerate()) {
-            return (game.getFramerate());
+        if (avg >= game.getTargetFramerate()) {
+            return (game.getTargetFramerate());
         }
 
         return (avg);

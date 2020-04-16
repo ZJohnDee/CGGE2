@@ -5,6 +5,7 @@ import java.io.IOException;
 import de.cg.cgge.files.FileContents;
 import de.cg.cgge.files.GameFile;
 import de.cg.cgge.gui.Drawer;
+import de.cg.cgge.gui.Window;
 
 public class GameInstance {
 
@@ -14,6 +15,7 @@ public class GameInstance {
     private int framerate = 60;
     private int width = 1280;
     private int height = 720;
+    private boolean isTaskbarActive = false;
 
     private Drawer drawer;
 
@@ -50,6 +52,8 @@ public class GameInstance {
                     height = Integer.parseInt(fc.getFromKeyword("height"));
                 if (fc.getFromKeyword("framerate") != null)
                     framerate = Integer.parseInt(fc.getFromKeyword("framerate"));
+                if (fc.getFromKeyword("taskbar") != null)
+                    isTaskbarActive = Boolean.parseBoolean(fc.getFromKeyword("taskbar"));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -67,15 +71,24 @@ public class GameInstance {
         return height;
     }
 
+    /**
+     * Sets the target height AND adjusts the height of getDrawer().getWindow()
+     * @param height Height value
+     */
     public void setHeight(int height) {
+        drawer.getWindow().setSize(width, height);
         this.height = height;
     }
 
     public int getWidth() {
         return width;
     }
-
+    /**
+     * Sets the target width AND adjusts the width of getDrawer().getWindow()
+     * @param width Width value
+     */
     public void setWidth(int width) {
+        drawer.getWindow().setSize(width, height);
         this.width = width;
     }
 
@@ -83,7 +96,7 @@ public class GameInstance {
      * 
      * @return The target framerate; It does not return the actual framerate
      */
-    public int getFramerate() {
+    public int getTargetFramerate() {
         return framerate;
     }
     
@@ -96,18 +109,37 @@ public class GameInstance {
     }
 
     /**
-     * 
-     * @return Shortcut to gameInstance.getDrawer().getRoom();
+     * Link to getDrawer().getWindow()
+     * @return Window instance
+     */
+    public Window getWindow() {
+        return drawer.getWindow();
+    }
+
+    /**
+     * Shortcut to gameInstance.getDrawer().getRoom();
+     * @return Room instance
      */
     public Room getRoom() {
         return drawer.getRoom();
     }
 
+    /**
+     * Changes the room in a save manner;
+     * It pauses the previous room and calls a drawer.setRoom(room) method
+     * Shortcut to drawer.changeRoomSafely(Room);
+     * @param room The room to be changed
+     */
+    public void changeRoomSafely(Room room) {
+        drawer.changeRoomSafely(room);
+    }
 
-    
-
-
-
-
+    /**
+     * Whether task bar is active or not
+     * @return Taskbar
+     */
+    public boolean isTaskbarActive() {
+        return isTaskbarActive;
+    }
 
 }
