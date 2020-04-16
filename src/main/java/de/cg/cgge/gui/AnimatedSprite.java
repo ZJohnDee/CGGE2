@@ -114,6 +114,7 @@ public class AnimatedSprite {
      * Draws the sprite at given position
      * @param x x-Position
      * @param y y-Position
+     * @param zoom The zoom to be applied to the sprite
      * @param g Graphics instance
      */
     public void draw(int x, int y, float zoom,  Graphics g) {
@@ -129,6 +130,12 @@ public class AnimatedSprite {
         }
     }
 
+    /**
+     * Draws the sprite at given position
+     * @param x x-Position
+     * @param y y-Position
+     * @param g Graphics instance
+     */
     public void draw(int x, int y, Graphics g) {
         draw(x, y, 1f, g);
     }

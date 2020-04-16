@@ -72,6 +72,7 @@ public class Sprite  {
      * Draws the sprite at a given position
      * @param x The x-Position
      * @param y The y-Postion
+     * @param zoom The zoom, to be applied to the sprite
      * @param g The graphics instance
      */
     public void draw(int x, int y, float zoom,  Graphics g) {
@@ -87,6 +88,12 @@ public class Sprite  {
         }
     }
 
+    /**
+     * Draws the sprite at a given position
+     * @param x The x-Position
+     * @param y The y-Postion
+     * @param g The graphics instance
+     */
     public void draw(int x, int y, Graphics g) {
         draw(x,y,1f, g);
     }
