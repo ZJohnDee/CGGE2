@@ -68,8 +68,8 @@ public class CameraRenderer {
      */
     public void drawImage(Image img, int x, int y) {
 
-        int nx = (int) x-cam.getX();
-        int ny = (int) y-cam.getY();
+        int nx = (int) ((x-cam.getX())*cam.getZoom());
+        int ny = (int) ((y-cam.getY())*cam.getZoom());
 
         if (cam.getZoom() != 1) {
             img = img.getScaledInstance((int) (img.getWidth(null)*cam.getZoom()), (int) (img.getHeight(null)*cam.getZoom()), Image.SCALE_REPLICATE);
@@ -109,7 +109,7 @@ public class CameraRenderer {
         int nh = (int) (sprite.getHeight()*cam.getZoom());
 
         if (cam.isInView(nx, ny, nw, nh))
-            sprite.draw(nx, ny, g);
+            sprite.draw(nx, ny, cam.getZoom(), g);
     }
 
     /**
@@ -126,7 +126,7 @@ public class CameraRenderer {
         int nh = (int) (sprite.getHeight()*cam.getZoom());
 
         if (cam.isInView(nx, ny, nw, nh))
-            sprite.draw(nx, ny, g);
+            sprite.draw(nx, ny, cam.getZoom(), g);
     }
 
     /**
@@ -169,4 +169,26 @@ public class CameraRenderer {
         return (int) ((y-cam.getY())*cam.getZoom());
     }
 
+    /**
+     * Adjusts the width based on the camera's zoom
+     * @param width The width value to be adjusted
+     * @return Returns an adjusted value
+     */
+    public int getAdjustedWidth(int width) {
+        return (int) (width*cam.getZoom());
+    }
+
+    /**
+     * Adjusts the height based on the camera's zoom
+     * @param height The height value to be adjusted
+     * @return Returns an adjusted value
+     */
+    public int getAdjustedHeight(int height) {
+        return (int) (height*cam.getZoom());
+    }
+
+
+    public Camera getCamera() {
+        return this.cam;
+    }
 }

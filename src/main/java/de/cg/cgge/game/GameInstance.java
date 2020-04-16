@@ -10,7 +10,6 @@ import de.cg.cgge.gui.Window;
 public class GameInstance {
 
     private String title = "GAME";
-    private String configFile;
 
     private int framerate = 60;
     private int width = 1280;
@@ -33,12 +32,11 @@ public class GameInstance {
      * @param config The config; It's loaded as a GameFile
      */
     public GameInstance(String config) {
-        configFile = config;  
 
         //Load config
         if (!config.equals("")) {
             try {
-                GameFile gf = new GameFile(configFile);
+                GameFile gf = new GameFile(config);
                 gf.loadToMemory(); 
 
                 FileContents fc = gf.getContents();
@@ -72,11 +70,10 @@ public class GameInstance {
     }
 
     /**
-     * Sets the target height AND adjusts the height of getDrawer().getWindow()
+     * Sets the target height. It does not affect the actual window size
      * @param height Height value
      */
     public void setHeight(int height) {
-        drawer.getWindow().setSize(width, height);
         this.height = height;
     }
 
@@ -84,12 +81,29 @@ public class GameInstance {
         return width;
     }
     /**
-     * Sets the target width AND adjusts the width of getDrawer().getWindow()
+     * Sets the target width. It does not affect the actual window size
      * @param width Width value
      */
     public void setWidth(int width) {
+        this.width = width;
+    }
+
+    /**
+     * Changes the width of getDrawer().getWindow()
+     * @param width New Width
+     */
+    public void changeWidth(int width) {
         drawer.getWindow().setSize(width, height);
         this.width = width;
+    }
+
+    /**
+     * Changes the height of getDrawer().getWindow()
+     * @param height New Height
+     */
+    public void changeHeight(int height) {
+        drawer.getWindow().setSize(width, height);
+        this.height = height;
     }
 
     /**
@@ -98,6 +112,14 @@ public class GameInstance {
      */
     public int getTargetFramerate() {
         return framerate;
+    }
+
+    /**
+     * Link to getDrawer().getCurrentFramerate();
+     * @return Current framerate
+     */
+    public float getCurrentFramerate() {
+        return drawer.getCurrentFramerate();
     }
     
     public String getTitle() {

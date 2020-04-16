@@ -93,7 +93,7 @@ public class Camera {
         this.xpadding = xpadding;
     }
 
-    public double getZoom() {
+    public float getZoom() {
         return zoom;
     }
 
