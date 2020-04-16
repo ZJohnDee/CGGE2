@@ -23,7 +23,7 @@ public abstract class Physics {
      * @param game The GameInstance, it is running on
      * @return Adjusted delta time
      */
-    public static float AdjustedDeltaTime(GameInstance game) {
+    public static float adjustedDeltaTime(GameInstance game) {
         return ((float)game.getDrawer().getRoom().getClock().adjustedDeltaTime);
     }
 
@@ -33,7 +33,7 @@ public abstract class Physics {
      * @param game The GameInstance, it is running on
      * @return Delta Time
      */
-    public static float DeltaTime(GameInstance game) {
+    public static float deltaTime(GameInstance game) {
         return ((float)game.getDrawer().getRoom().getClock().deltaTime);
     }
     
