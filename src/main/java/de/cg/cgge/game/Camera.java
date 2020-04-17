@@ -147,8 +147,8 @@ public class Camera {
      */
     public boolean isInView(int x, int y, int w, int h) {
 
-        if (x+w < this.xpos || x > this.xpos+room.getGameInstance().getWindow().getWidth()) return false;
-        if (y+h < this.ypos || y > this.ypos+room.getGameInstance().getWindow().getHeight()) return false;
+        if (x+w < 0 || x > room.getGameInstance().getWindow().getWidth()) return false;
+        if (y+h < 0 || y > room.getGameInstance().getWindow().getHeight()) return false;
 
         return true;
 
