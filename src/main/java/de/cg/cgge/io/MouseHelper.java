@@ -39,7 +39,7 @@ public class MouseHelper {
      * @return Returns (getMouseX() - camera.getX())
      */
     public int getGlobalMouseX() {
-        var current = getMouseX();
+        int current = getMouseX();
 
         return (current - game.getRoom().getCamera().getX());
     }
@@ -50,7 +50,7 @@ public class MouseHelper {
      * @return Returns (getMouseY() - camera.getY())
      */
     public int getGlobalMouseY() {
-        var current = getMouseY();
+        int current = getMouseY();
 
         return (current - game.getRoom().getCamera().getY());
     }

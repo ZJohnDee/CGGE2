@@ -95,8 +95,8 @@ public class FileContents {
 
     /**
      * Returns an Array of columns, that are in an individual row
-     * @param row
-     * @return
+     * @param row Row
+     * @return Array of columns
      */
     public String[] getColumnsFromTableRow(int row) {
         return get()[row].split(splitter);
