@@ -77,16 +77,16 @@ public class Player extends GameObject {
         /* Moving based on key input */
 
         if(keys.getKey(KeyEvent.VK_W)) {
-            y -= speed * speed * delta;
+            y -= speed * delta;
         }
         if(keys.getKey(KeyEvent.VK_S)) {
-            y += speed * speed * delta;
+            y += speed * delta;
         }
         if(keys.getKey(KeyEvent.VK_A)) {
-            x -= speed * speed * delta;
+            x -= speed * delta;
         }
         if(keys.getKey(KeyEvent.VK_D)) {
-            x += speed * speed * delta;
+            x += speed * delta;
         }
 
     }
