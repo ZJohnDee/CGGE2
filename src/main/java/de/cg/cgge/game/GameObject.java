@@ -110,6 +110,10 @@ public class GameObject {
         return this.id;
     }
 
+    public void setID(long id) {
+        this.id = id;
+    }
+
     public boolean isVisible() {
         return visible; 
     }

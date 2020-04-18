@@ -38,15 +38,18 @@ Here's the roadmap for the year:
 
 <h1>Code Examples</h1>
 <h4>Simple example of a moving player</h4>
+App.java
 
 ```JAVA
-public class Main {
+public class App {
     public static void main(String[] args) {
         GameInstance game = new GameInstance("gameConfig.data");
         GameObject player = new Player(game.getRoom());
     }
 }
 ```
+
+Player.java
 
 ```JAVA
 /* Needs to extend the GameObject class */
