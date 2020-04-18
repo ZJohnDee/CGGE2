@@ -22,8 +22,11 @@ public class GameObject {
     protected Room room; 
 
     private ArrayList<Physics> physics = new ArrayList<>(0);
- 
 
+    /**
+     * Creates a GameObject, important for logic and drawing
+     * @param room calls a getObjectManager().addObject(this) on the room
+     */
     public GameObject(Room room) {
         this.room = room; 
         room.getObjectManager().addObject(this);
@@ -61,7 +64,7 @@ public class GameObject {
     }
     
     /**
-     * Is drawn at the end of the tick
+     * Is drawn at the end of the tick. Recommended for GUI
      * @param g The Graphics element of the JPanel
      */
     public void postDraw(Graphics g) {
@@ -83,7 +86,7 @@ public class GameObject {
     }
 
     /**
-     * @param e Event thats called, when mouse is pressed
+     * @param e Event thats called, when mouse is released
      */
     public void mouseReleased(MouseEvent e) {
 
@@ -105,10 +108,6 @@ public class GameObject {
 
     public long getID() {
         return this.id;
-    }
-
-    public void setID(long id) {
-        this.id = id; 
     }
 
     public boolean isVisible() {

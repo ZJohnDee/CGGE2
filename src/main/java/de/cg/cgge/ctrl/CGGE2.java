@@ -5,7 +5,7 @@ import de.cg.cgge.game.GameInstance;
 public class CGGE2 {
 
     private static String version = "pre-1.0-b7";
-    private static int release = 0;
+    private static int compatibilityLayer = 0;
 
     public static boolean package_uiplus = false;
 
@@ -31,7 +31,7 @@ public class CGGE2 {
         return version;
     }
 
-    public static int getRelease() {
-        return release;
+    public static int getCompatibilityLayer() {
+        return compatibilityLayer;
     }
 }

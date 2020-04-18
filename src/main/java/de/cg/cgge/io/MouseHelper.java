@@ -34,6 +34,27 @@ public class MouseHelper {
         return (int)info.getLocation().getY()-(int)game.getDrawer().getWindow().getBounds().getY();
     }
 
+    /**
+     * Returns the mouse position adjusted to the room's camera position
+     * @return Returns (getMouseX() - camera.getX())
+     */
+    public int getGlobalMouseX() {
+        var current = getMouseX();
+
+        return (current - game.getRoom().getCamera().getX());
+    }
+
+
+    /**
+     * Returns the mouse position adjusted to the room's camera position
+     * @return Returns (getMouseY() - camera.getY())
+     */
+    public int getGlobalMouseY() {
+        var current = getMouseY();
+
+        return (current - game.getRoom().getCamera().getY());
+    }
+
 
     /**
      * @param x Upper left corner of section

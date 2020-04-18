@@ -130,7 +130,7 @@ public class Camera {
     }
 
     /**
-     * 
+     * Sets the object, the camera is going to follow, based on the padding values
      * @param toFollow The object, the camera should follow
      */
     public void setObjectToFollow(GameObject toFollow) {
@@ -138,7 +138,7 @@ public class Camera {
     }
 
     /**
-     * Chechs wether a given rectangle is in view of the camera
+     * Checks whether a given rectangle is in view of the camera
      * @param x X position of upper left corner of the rectangle
      * @param y Y position of upper left corner of the rectangle
      * @param w The width of the rectangle

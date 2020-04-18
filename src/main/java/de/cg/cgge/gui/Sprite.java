@@ -114,6 +114,18 @@ public class Sprite  {
         return this.height;
     }
 
+    public int getCenterX() {
+        return centerX;
+    }
+
+    public int getCenterY() {
+        return centerY;
+    }
+
+    public BufferedImage getImg() {
+        return img;
+    }
+
     /**
      * 
      * @return Returns the buffered image

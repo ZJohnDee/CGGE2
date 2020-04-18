@@ -75,20 +75,41 @@ public class FileContents {
         contents.add(str); 
     }
 
+    /**
+     * Sets how the table columns should be split
+     * @param splitter The splitter to be used
+     */
     public void setTableSplitter(String splitter) {
         this.splitter = splitter; 
     }
 
+    /**
+     * Searches for row and column and returns that specific string
+     * @param row Row
+     * @param column Column
+     * @return What is in the table at row and column
+     */
     public String getFromTableSection(int row, int column) {
-        row--;
-        column--;
         return get()[row].split(splitter)[column];
     }
 
-    public String[] getFromTableRow(int row) {
+    /**
+     * Returns an Array of columns, that are in an individual row
+     * @param row
+     * @return
+     */
+    public String[] getColumnsFromTableRow(int row) {
         return get()[row].split(splitter);
     }
 
+    /**
+     * Searches for specific keyword in file contents.
+     * When the file contains a line
+     *  <i>a keyword: test test</i>
+     * then getFromKeyword("a test") would return 'test test'
+     * @param keyword The keyword, that should be looked out for
+     * @return The result of the keyword
+     */
     public String getFromKeyword(String keyword) {
 
         for (String row : get()) {

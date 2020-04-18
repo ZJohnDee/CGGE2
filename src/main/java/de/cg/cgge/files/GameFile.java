@@ -1,10 +1,6 @@
 package de.cg.cgge.files;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class GameFile {
@@ -29,11 +25,11 @@ public class GameFile {
     public File getFile() {
         return this.file; 
     }
+
     /**
      * Loads the file to memory
      * @throws IOException Exception
      */
-
     public void loadToMemory() throws IOException {
         ArrayList<String> contents = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(file)); 
@@ -59,11 +55,7 @@ public class GameFile {
      */
     public FileContents getContents() {
         if(!fileContentsLoaded)
-            try {
-                loadToMemory();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            throw new IllegalStateException("");
 
         return this.fileContents; 
     }

@@ -20,7 +20,7 @@ public class DrawClock extends Clock {
             try {
                 this.game.getDrawer().getWindow().getDrawPanel().paintImmediately(0,0,game.getWidth(), game.getHeight());
             } catch (ConcurrentModificationException e) {
-                System.out.println("Caught ConcurrentModificationException");
+
             }
         }
 
