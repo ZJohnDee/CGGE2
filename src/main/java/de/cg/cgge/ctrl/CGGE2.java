@@ -4,10 +4,8 @@ import de.cg.cgge.game.GameInstance;
 
 public class CGGE2 {
 
-    private static String version = "pre-1.0-b7";
-    private static int compatibilityLayer = 0;
-
-    public static boolean package_uiplus = false;
+    private static final String version = "1.0";
+    private static final int compatibilityLayer = 1;
 
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -21,9 +19,6 @@ public class CGGE2 {
                 new GameInstance();
             }
 
-            if (args[0].equals("packages")) {
-                System.out.println("UIPlus: " + package_uiplus);
-            }
         }
     }
 
