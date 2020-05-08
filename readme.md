@@ -20,18 +20,18 @@ Read the documentation included in the download for further information.
 Here's the roadmap for the year:
 <table>
   <tr>
-    <td>April 2020</td>
+    <td>May 2020</td>
     <td>First Stable Release</td>
   </tr>
   <tr>
-    <td>May 2020</td>
+    <td>July 2020</td>
     <td>TileEditor and UI-Package</td>
   <tr>
-    <td>July 2020</td>
+    <td>October 2020</td>
     <td>Version 2.0 Pre-Release with several planned improvements</td>
   </tr>
   <tr>
-    <td>October 2020</td>
+    <td>December 2020</td>
     <td>Release of Version 2.0 and a simple room builder.</td>
   </tr>
 </table>
