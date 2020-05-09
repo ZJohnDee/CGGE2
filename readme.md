@@ -53,6 +53,15 @@ Player.java
 
 ```JAVA
 /* Needs to extend the GameObject class */
+
+import de.cg.cgge.game.GameObject;
+import de.cg.cgge.game.Room;
+import de.cg.cgge.io.KeyManager;
+import de.cg.cgge.physics.Physics;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+
 public class Player extends GameObject {
         
     final int speed = 300;
@@ -76,16 +85,16 @@ public class Player extends GameObject {
 
         /* Moving based on key input */
 
-        if(keys.getKey(KeyEvent.VK_W)) {
+        if(keys.checkKey(KeyEvent.VK_W)) {
             y -= speed * delta;
         }
-        if(keys.getKey(KeyEvent.VK_S)) {
+        if(keys.checkKey(KeyEvent.VK_S)) {
             y += speed * delta;
         }
-        if(keys.getKey(KeyEvent.VK_A)) {
+        if(keys.checkKey(KeyEvent.VK_A)) {
             x -= speed * delta;
         }
-        if(keys.getKey(KeyEvent.VK_D)) {
+        if(keys.checkKey(KeyEvent.VK_D)) {
             x += speed * delta;
         }
 
