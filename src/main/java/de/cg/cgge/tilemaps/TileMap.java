@@ -13,6 +13,8 @@ import java.awt.*;
 
 import de.cg.cgge.game.*;
 
+import static de.cg.cgge.utils.StringConstants.COMMA;
+
 public class TileMap {
 
     private int mapWidth, mapHeight;
@@ -50,7 +52,7 @@ public class TileMap {
             String lineOne = fc.get()[0];
 
             // Setup basic settings
-            String[] lineOneParts = lineOne.split(",");
+            String[] lineOneParts = lineOne.split(COMMA);
             setTileSetPath(lineOneParts[0]);
             setTileSize(Integer.parseInt(lineOneParts[1]));
             setMapWidth(Integer.parseInt(lineOneParts[2]));
@@ -64,10 +66,10 @@ public class TileMap {
             collisionLayer = new boolean[mapHeight+1][mapWidth+1];
             actionLayer = new String[mapHeight+1][mapWidth+1];
 
-            String[] l1 = fc.get()[1].split(",");
-            String[] l2 = fc.get()[2].split(",");
-            String[] lc = fc.get()[3].split(",");
-            String[] la = fc.get()[4].split(",");
+            String[] l1 = fc.get()[1].split(COMMA);
+            String[] l2 = fc.get()[2].split(COMMA);
+            String[] lc = fc.get()[3].split(COMMA);
+            String[] la = fc.get()[4].split(COMMA);
 
             String[][] layers = new String[4][l1.length];
             
