@@ -85,7 +85,7 @@ public class FileContents {
      */
     public void append(String str) {
         contents.add(str);
-        appendToCacheCache(str);
+        appendToCache(str);
     }
 
     /**
@@ -134,7 +134,7 @@ public class FileContents {
         LOGGER.debug("initialised file content cache with contents");
         try {
             for (String row : get()) {
-                appendToCacheCache(row);
+                appendToCache(row);
             }
         }catch (Exception e){
             LOGGER.error("Error happened while trying to populate the file content cache ",e);
@@ -145,7 +145,7 @@ public class FileContents {
      * Adds the input string to the local cache.
      * @param str key - value string separated by ':' to be added in the cache.
      */
-    private void appendToCacheCache(String str){
+    private void appendToCache(String str){
         if(contentCache == null){
             contentCache = new HashMap<>();
         }
