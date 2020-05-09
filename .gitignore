@@ -9,5 +9,4 @@ target/
 todo.txt
 update.txt
 *.iml
-pom.xml
 *.bat
