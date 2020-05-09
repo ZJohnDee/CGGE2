@@ -38,7 +38,7 @@ public class FileContents {
      * @param contents A string array
      */
     public void set(String[] contents) {
-       this.contents = (ArrayList<String>) Arrays.asList(contents);
+       this.contents = new ArrayList<String>(Arrays.asList(contents));
     }
 
     /**
