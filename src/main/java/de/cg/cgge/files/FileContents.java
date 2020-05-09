@@ -1,20 +1,32 @@
 package de.cg.cgge.files;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import static de.cg.cgge.utils.StringConstants.COLON;
+import static de.cg.cgge.utils.StringConstants.SEMICOLON;
 
 public class FileContents {
 
-    private String splitter = ";";
+    private static final Logger LOGGER = LogManager.getLogger(FileContents.class);
 
-    private ArrayList<String> contents = new ArrayList<>(); 
+    private String splitter = SEMICOLON;
+
+    private ArrayList<String> contents = new ArrayList<>();
+    private Map<String, String> contentCache;
 
     /**
      * Creates a container for the contents, which makes it easy
      * @param contents The lines of the file
      */
     public FileContents(ArrayList<String> contents) {
-        this.contents = contents; 
+        this.contents = contents;
+        loadKeyWordsToCache();
     }
 
     /**
@@ -68,11 +80,12 @@ public class FileContents {
     }
 
     /**
-     * Append a line to the current contents
+     * Append a line to the current contents, and refresh the cache.
      * @param str The line to be appended
      */
     public void append(String str) {
-        contents.add(str); 
+        contents.add(str);
+        appendToCacheCache(str);
     }
 
     /**
@@ -111,14 +124,37 @@ public class FileContents {
      * @return The result of the keyword
      */
     public String getFromKeyword(String keyword) {
+        return contentCache.get(keyword);
+    }
 
-        for (String row : get()) {
-            String[] columns = row.split(": ");
-            if (columns[0].equals(keyword)) {
-                return columns[1];
+    /**
+     * Iterates over the whole list of contents and populates the key-value pairs of the content list separated by ':' into the contentCache hash map.
+     */
+    private void loadKeyWordsToCache(){
+        LOGGER.debug("initialised file content cache with contents");
+        try {
+            for (String row : get()) {
+                appendToCacheCache(row);
             }
+        }catch (Exception e){
+            LOGGER.error("Error happened while trying to populate the file content cache ",e);
+        }
+    }
+
+    /**
+     * Adds the input string to the local cache.
+     * @param str key - value string separated by ':' to be added in the cache.
+     */
+    private void appendToCacheCache(String str){
+        if(contentCache == null){
+            contentCache = new HashMap<>();
         }
 
-        return null; 
+        try{
+            String[] columns = str.split(COLON);
+            contentCache.put(columns[0].trim(), columns[1].trim());
+        }catch (Exception e){
+            LOGGER.error("Error happened while trying to append new key-value pair into the file content cache ",e);
+        }
     }
 }
