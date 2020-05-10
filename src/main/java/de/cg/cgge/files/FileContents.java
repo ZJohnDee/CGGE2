@@ -1,8 +1,5 @@
 package de.cg.cgge.files;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,8 +9,6 @@ import static de.cg.cgge.utils.StringConstants.COLON;
 import static de.cg.cgge.utils.StringConstants.SEMICOLON;
 
 public class FileContents {
-
-    private static final Logger LOGGER = LogManager.getLogger(FileContents.class);
 
     private String splitter = SEMICOLON;
 
@@ -131,13 +126,12 @@ public class FileContents {
      * Iterates over the whole list of contents and populates the key-value pairs of the content list separated by ':' into the contentCache hash map.
      */
     private void loadKeyWordsToCache(){
-        LOGGER.debug("initialised file content cache with contents");
         try {
             for (String row : get()) {
                 appendToCache(row);
             }
         }catch (Exception e){
-            LOGGER.error("Error happened while trying to populate the file content cache ",e);
+            e.printStackTrace();
         }
     }
 
@@ -154,7 +148,7 @@ public class FileContents {
             String[] columns = str.split(COLON);
             contentCache.put(columns[0].trim(), columns[1].trim());
         }catch (Exception e){
-            LOGGER.error("Error happened while trying to append new key-value pair into the file content cache ",e);
+            e.printStackTrace();
         }
     }
 }
