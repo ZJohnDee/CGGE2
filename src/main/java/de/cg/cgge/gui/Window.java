@@ -29,7 +29,7 @@ public class Window extends JFrame {
         drawPanel = new DrawPanel(drawer); 
         setUndecorated(!drawer.getGameInstance().isTaskbarActive());
         setResizable(true);
-        setVisible(true);
+        setVisible(drawer.getGameInstance().isVisible());
         setFocusable(false);
         addComponentListener(new WindowListener());
         setBounds(50, 50, drawer.getGameInstance().getWidth(), drawer.getGameInstance().getHeight());

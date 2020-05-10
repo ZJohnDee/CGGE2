@@ -15,6 +15,7 @@ public class GameInstance {
     private int width = 1280;
     private int height = 720;
     private boolean isTaskbarActive = false;
+    private boolean isVisible = true;
 
     private Drawer drawer;
 
@@ -52,6 +53,8 @@ public class GameInstance {
                     framerate = Integer.parseInt(fc.getFromKeyword("framerate"));
                 if (fc.getFromKeyword("taskbar") != null)
                     isTaskbarActive = Boolean.parseBoolean(fc.getFromKeyword("taskbar"));
+                if (fc.getFromKeyword("visible") != null)
+                    isVisible = Boolean.parseBoolean(fc.getFromKeyword("visible"));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -162,6 +165,15 @@ public class GameInstance {
      */
     public boolean isTaskbarActive() {
         return isTaskbarActive;
+    }
+
+
+    /**
+     * Whether the game is visible or not
+     * @return
+     */
+    public boolean isVisible() {
+        return isVisible;
     }
 
 }

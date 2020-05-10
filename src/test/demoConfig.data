@@ -1,0 +1,5 @@
+width: 500
+height: 500
+title: TestGame
+framerate: 60
+visible: false
