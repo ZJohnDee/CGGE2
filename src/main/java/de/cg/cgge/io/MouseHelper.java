@@ -26,12 +26,12 @@ public class MouseHelper {
     }
 
     /**
-    * 
     * @return Returns the y-Postion of the mouse
     */
     public int getMouseY() {
         PointerInfo info = MouseInfo.getPointerInfo();
-        return (int)info.getLocation().getY()-(int)game.getDrawer().getWindow().getBounds().getY();
+        int taskBarOffset = (game.isTaskbarActive() ? -27 : 0); //27 is a value that was found out by trial and error. May differ depending on the OS
+        return (int) (info.getLocation().getY()-game.getDrawer().getWindow().getBounds().getY() + taskBarOffset);
     }
 
     /**
