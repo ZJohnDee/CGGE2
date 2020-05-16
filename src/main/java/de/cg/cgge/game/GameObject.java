@@ -1,10 +1,11 @@
 package de.cg.cgge.game;
 
-import java.awt.Graphics;
-import java.awt.event.*;
-import java.util.ArrayList;
-
 import de.cg.cgge.physics.Physics;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class GameObject {
 
@@ -25,10 +26,19 @@ public class GameObject {
 
     /**
      * Creates a GameObject, important for logic and drawing
+     *
      * @param room calls a getObjectManager().addObject(this) on the room
      */
     public GameObject(Room room) {
-        this.room = room; 
+        this.room = room;
+        room.getObjectManager().addObject(this);
+    }
+
+    public GameObject() {
+
+    }
+
+    public void create(Room room) {
         room.getObjectManager().addObject(this);
     }
 
@@ -182,7 +192,4 @@ public class GameObject {
             p.update();
         } 
     }
-
-    
-
 } 
