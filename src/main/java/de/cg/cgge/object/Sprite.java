@@ -1,8 +1,6 @@
 package de.cg.cgge.object;
 
 
-import de.cg.cgge.game.GameObject;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -10,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 
-public class Sprite extends GameObject {
+public class Sprite {
     /*
         Sprite 2.0
 
@@ -73,7 +71,7 @@ public class Sprite extends GameObject {
         try {
             this.image = ImageIO.read(texture);
             width = this.image.getWidth();
-            getFlipbookTextures();
+            initFlipbookTextures();
             currentAnimation = Animation.DEFAULT;
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +87,7 @@ public class Sprite extends GameObject {
         this.image = sprite.image;
         this.width = sprite.width;
         this.flipbookCount = sprite.flipbookCount;
-        getFlipbookTextures();
+        initFlipbookTextures();
         currentAnimation = Animation.DEFAULT;
     }
 
@@ -99,7 +97,7 @@ public class Sprite extends GameObject {
      * of equal pieces on the y axis
      * and save them to frameTextures
      */
-    public void getFlipbookTextures() {
+    private void initFlipbookTextures() {
         //This could be very inaccurate if the developer didn't define a proper flipbook count
         //By default it's 1 so that should be fine
         this.height = this.image.getHeight() / this.flipbookCount;
@@ -170,6 +168,7 @@ public class Sprite extends GameObject {
      */
     public void show() {
         this.visible = true;
+        this.changed = true;
     }
 
     /**
@@ -235,7 +234,7 @@ public class Sprite extends GameObject {
     public void setFlipbookCount(int flipbookCount) {
         this.flipbookCount = flipbookCount;
         changed = true;
-        getFlipbookTextures();
+        initFlipbookTextures();
     }
 
     /**
@@ -293,7 +292,13 @@ public class Sprite extends GameObject {
         changed = true;
     }
 
-    @Override
+    /**
+     * Draws the current sprite to the window
+     * <p>
+     * This should be ran every tick
+     *
+     * @param g
+     */
     public void draw(Graphics g) {
 
         //Only draw if the sprite is visible and there was a change from the last frame
@@ -313,10 +318,13 @@ public class Sprite extends GameObject {
             }
             changed = false;
         }
+        tick();
     }
 
-    @Override
-    public void step() {
+    /**
+     * Increments the current animation tick and does some vital checks
+     */
+    private void tick() {
         currentTick++;
 
         //Checks if the tick is at the current animations last tick
