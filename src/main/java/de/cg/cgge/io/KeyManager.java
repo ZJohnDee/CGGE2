@@ -46,4 +46,18 @@ public class KeyManager implements KeyListener {
         return keys[keyCode];
     }
 
+    /**
+     * Checks, whether a key was pressed or not.
+     * When it returns true, the key is then 'unpressed' and is going to return false until the key is pressed again
+     * Useful for e.g. inventory opening
+     * @param keyCode The key code of the key to be checked
+     * @return Returns the boolean value of the key
+     */
+    public boolean fetchKey(int keyCode) {
+        boolean val = keys[keyCode];
+        if (!val) return false; //Returning false, if the key is not pressed
+        keys[keyCode] = false; //If key is pressed, then set the key globally to false
+        return true; //Return true as the key was originally pressed
+    }
+
 }
