@@ -119,7 +119,9 @@ public class FileContents {
      * @return The result of the keyword
      */
     public String getFromKeyword(String keyword) {
+        if (contentCache.containsKey(keyword))
         return contentCache.get(keyword);
+        return null;
     }
 
     /**
@@ -140,12 +142,16 @@ public class FileContents {
      * @param str key - value string separated by ':' to be added in the cache.
      */
     private void appendToCache(String str){
+
+        if (!str.contains(":")) return;
+
         if(contentCache == null){
             contentCache = new HashMap<>();
         }
 
         try{
             String[] columns = str.split(COLON);
+            if (columns == null) return;
             contentCache.put(columns[0].trim(), columns[1].trim());
         }catch (Exception e){
             e.printStackTrace();
