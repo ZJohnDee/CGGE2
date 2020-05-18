@@ -170,7 +170,7 @@ public class GameInstance {
 
     /**
      * Whether the game is visible or not
-     * @return
+     * @return Whether the window is visible or not
      */
     public boolean isVisible() {
         return isVisible;

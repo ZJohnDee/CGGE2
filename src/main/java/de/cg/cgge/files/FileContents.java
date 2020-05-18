@@ -12,7 +12,7 @@ public class FileContents {
 
     private String splitter = SEMICOLON;
 
-    private ArrayList<String> contents = new ArrayList<>();
+    private ArrayList<String> contents;
     private Map<String, String> contentCache;
 
     /**
