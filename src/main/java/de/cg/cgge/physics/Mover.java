@@ -22,7 +22,7 @@ public class Mover extends Physics {
      */
     public Mover(GameObject obj) {
         super(obj);
-        col = new Collider(obj.getRoom(), obj);  
+        col = new BoxCollider(obj.getRoom(), obj);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Mover extends Physics {
 
         onGround = false; 
 
-        if (xspeed != 0 && col.checkSolidBoxCollision(x+ (int)xspeed, y, obj.getWidth(), obj.getHeight())) {
+        if (xspeed != 0 && col.checkSolidCollision(x+ (int)xspeed, y, obj.getWidth(), obj.getHeight())) {
             GameObject lastCollision = col.getLastCollision();
             
             if (xspeed > 0 ) {
@@ -47,7 +47,7 @@ public class Mover extends Physics {
             x += xspeed; 
         }
 
-        if (yspeed != 0 && col.checkSolidBoxCollision(x, y + (int) yspeed, obj.getWidth(), obj.getHeight())) {
+        if (yspeed != 0 && col.checkSolidCollision(x, y + (int) yspeed, obj.getWidth(), obj.getHeight())) {
             GameObject lastCollision = col.getLastCollision();
             
             if (yspeed > 0 ) {

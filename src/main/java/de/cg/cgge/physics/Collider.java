@@ -3,12 +3,12 @@ package de.cg.cgge.physics;
 import de.cg.cgge.game.GameObject;
 import de.cg.cgge.game.Room;
 
-public class Collider {
+public abstract class Collider {
 
-    private int lastCollision = 0; 
-    private Room room; 
+    protected int lastCollision = 0;
+    protected Room room;
 
-    private GameObject tester; 
+    protected GameObject tester;
 
     /**
      * Creates a collider, which is necessary for Collision detection
@@ -22,32 +22,14 @@ public class Collider {
     } 
 
     /**
-        Checks for box-collision with objects that are solid
+        Checks for collision with objects that are solid
         @param x x-Corner
         @param y y-Corner
         @param w Width of object to check
         @param h Height of object to check
         @return Whether there is a collision or not
     */
-    public boolean checkSolidBoxCollision(float x, float y, int w, int h) {
-        
-        for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
-            GameObject obj = room.getObjectManager().getObjects().get(i); 
-
-            if (obj.isSolid() && obj != tester && 
-                    x < obj.getX() + obj.getWidth() &&
-                    x + w > obj.getX() &&
-                    y < obj.getY() + obj.getHeight() &&
-                    y + h > obj.getY()) {
-                
-                lastCollision = i; 
-                return true;
-            }
-            
-        }
-
-        return false; 
-    }   
+    abstract boolean checkSolidCollision(float x, float y, int w, int h);
     
     /**
         Checks for box-collision with all objects
@@ -57,55 +39,17 @@ public class Collider {
         @param h Height of object to check
         @return Whether there is a collision or not
     */
-    public boolean checkBoxCollision(float x, float y, int w, int h) {    
-
-        for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
-            GameObject obj = room.getObjectManager().getObjects().get(i); 
-
-            if (obj != tester && 
-                    x < obj.getX() + obj.getWidth() &&
-                    x + w > obj.getX() &&
-                    y < obj.getY() + obj.getHeight() &&
-                    y + h > obj.getY()) {
-                
-                lastCollision = i; 
-                return true;
-            }
-            
-        }
-
-        
-        return false; 
-    }
+    abstract boolean checkCollision(float x, float y, int w, int h);
 
     /**
-        Checks for box-collision with not solid objects
+        Checks for collisions with not solid objects
         @param x x-Corner
         @param y y-Corner
         @param w Width of object to check
         @param h Height of object to check
         @return Whether there is a collision or not
     */
-    public boolean checkUnsolidBoxCollision(int x, int y, int w, int h) {    
-
-        for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
-            GameObject obj = room.getObjectManager().getObjects().get(i); 
-
-            if (!(obj.isSolid()) && obj != tester && 
-                    x < obj.getX() + obj.getWidth() &&
-                    x + w > obj.getX() &&
-                    y < obj.getY() + obj.getHeight() &&
-                    y + h > obj.getY()) {
-                
-                lastCollision = i; 
-                return true;
-            }
-            
-        }
-
-        
-        return false; 
-    }
+    abstract boolean checkUnsolidCollision(int x, int y, int w, int h);
 
     /**
      * 

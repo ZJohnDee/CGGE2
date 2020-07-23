@@ -26,7 +26,7 @@ public class Gravity extends Physics {
 
         this.mover = mover; 
         mover.setYacceleration(1.0f);
-        this.collider = new Collider(obj.getRoom(), obj);
+        this.collider = new BoxCollider(obj.getRoom(), obj);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Gravity extends Physics {
         mover.setYspeed(mover.getYspeed()+force);
 
         force*=acceleration; 
-        if (collider.checkSolidBoxCollision(obj.getX(), obj.getY()+1, obj.getWidth(), obj.getHeight())
+        if (collider.checkSolidCollision(obj.getX(), obj.getY()+1, obj.getWidth(), obj.getHeight())
         || mover.getYspeed() > 0) {
             force = beginForce; 
         }
