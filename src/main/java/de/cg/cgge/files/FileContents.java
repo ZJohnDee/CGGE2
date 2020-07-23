@@ -125,6 +125,63 @@ public class FileContents {
     }
 
     /**
+     * Searches for specific keyword in file contents.
+     * When the file contains a line
+     *  <i>a keyword: 2</i>
+     * then getIntFromKeyword("a keyword") would return the integer 2
+     * Only does parsing from keyword contents to integer. So there is no error catching involved
+     * @param keyword The keyword, that should be looked out for
+     * @return The int result of the keyword
+     */
+    public int getIntFromKeyword(String keyword) {
+        String kw = getFromKeyword(keyword);
+        return Integer.parseInt(kw);
+    }
+
+    /**
+     * Searches for specific keyword in file contents.
+     * When the file contains a line
+     *  <i>a keyword: 2.0</i>
+     * then getDoubleFromKeyword("a keyword") would return the double 2.0
+     * Only does parsing from keyword contents to double. So there is no error catching involved
+     * @param keyword The keyword, that should be looked out for
+     * @return The double result of the keyword
+     */
+    public double getDoubleFromKeyword(String keyword) {
+        String kw = getFromKeyword(keyword);
+        return Double.parseDouble(kw);
+    }
+
+    /**
+     * Searches for specific keyword in file contents.
+     * When the file contains a line
+     *  <i>a keyword: true</i>
+     * then getBoolFromKeyword("a keyword") would return the boolean 'true'
+     * Only does parsing from keyword contents to boolean. So there is no error catching involved
+     * @param keyword The keyword, that should be looked out for
+     * @return The bool result of the keyword
+     */
+    public boolean getBoolFromKeyword(String keyword) {
+        String kw = getFromKeyword(keyword);
+        return Boolean.parseBoolean(kw);
+    }
+
+
+    /**
+     * Searches for specific keyword in file contents.
+     * When the file contains a line
+     *  <i>a keyword: a;b;c</i>
+     * then getArrayFromKeyword("a keyword", ";") would return the string array {"a","b","c"}
+     * @param keyword The keyword, that should be looked out for
+     * @param regexSeperator The regex that's used in the String.split(String) method.
+     * @return The string array result of the keyword
+     */
+    public String[] getArrayFromKeyword(String keyword, String regexSeperator) {
+        String kw = getFromKeyword(keyword);
+        return kw.split(regexSeperator);
+    }
+
+    /**
      * Iterates over the whole list of contents and populates the key-value pairs of the content list separated by ':' into the contentCache hash map.
      */
     private void loadKeyWordsToCache(){
