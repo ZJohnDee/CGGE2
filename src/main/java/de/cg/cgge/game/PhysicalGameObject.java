@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class PhysicalGameObject extends GameObject{
 
     protected CollisionShape collisionShape;
-    private ArrayList<Physics> physicsComponents = new ArrayList<>(0);
+    private final ArrayList<Physics> physicsComponents = new ArrayList<>(0);
 
     /**
      * Creates a GameObject, important for logic and drawing
@@ -35,8 +35,14 @@ public class PhysicalGameObject extends GameObject{
      * Call an update() method on all physics of the object
      */
     public void updatePhysics() {
+        collisionShape.setX(x);
+        collisionShape.setY(y);
         for (Physics p : physicsComponents) {
             p.update();
         }
+    }
+
+    public CollisionShape getCollisionShape() {
+        return collisionShape;
     }
 }

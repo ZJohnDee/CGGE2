@@ -1,14 +1,16 @@
 package de.cg.cgge.physics;
 
 import de.cg.cgge.game.GameObject;
+import de.cg.cgge.game.PhysicalGameObject;
 import de.cg.cgge.game.Room;
+import de.cg.cgge.physics.shapes.CollisionShape;
 
-public abstract class Collider {
+public class Collider {
 
     protected int lastCollision = 0;
     protected Room room;
 
-    protected GameObject tester;
+    protected PhysicalGameObject tester;
 
     /**
      * Creates a collider, which is necessary for Collision detection
@@ -16,40 +18,71 @@ public abstract class Collider {
      * @param room The current game room
      * @param tester The object, that tests for collisions
      */
-    public Collider(Room room, GameObject tester) {
+    public Collider(Room room, PhysicalGameObject tester) {
         this.room = room;
         this.tester = tester; 
     } 
 
     /**
         Checks for collision with objects that are solid
-        @param x x-Corner
-        @param y y-Corner
-        @param w Width of object to check
-        @param h Height of object to check
         @return Whether there is a collision or not
     */
-    abstract boolean checkSolidCollision(float x, float y, int w, int h);
-    
-    /**
-        Checks for box-collision with all objects
-        @param x x-Corner
-        @param y y-Corner
-        @param w Width of object to check
-        @param h Height of object to check
-        @return Whether there is a collision or not
-    */
-    abstract boolean checkCollision(float x, float y, int w, int h);
+    public boolean checkSolidCollision() {
 
-    /**
-        Checks for collisions with not solid objects
-        @param x x-Corner
-        @param y y-Corner
-        @param w Width of object to check
-        @param h Height of object to check
-        @return Whether there is a collision or not
-    */
-    abstract boolean checkUnsolidCollision(int x, int y, int w, int h);
+        for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
+            GameObject obj = room.getObjectManager().getObjects().get(i);
+            if (!(obj instanceof PhysicalGameObject)) continue;
+            PhysicalGameObject pobj = (PhysicalGameObject) obj;
+
+            if (obj.isSolid() && obj != tester && tester.getCollisionShape().isIntersecting(pobj.getCollisionShape()))
+            {
+                lastCollision = i;
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+
+
+    public boolean checkCollision() {
+        for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
+            GameObject obj = room.getObjectManager().getObjects().get(i);
+            if (!(obj instanceof PhysicalGameObject)) continue;
+            PhysicalGameObject pobj = (PhysicalGameObject) obj;
+
+            if (obj != tester && tester.getCollisionShape().isIntersecting(pobj.getCollisionShape()))
+            {
+                lastCollision = i;
+                return true;
+            }
+
+        }
+
+
+        return false;
+    }
+
+
+    public boolean checkUnsolidCollision() {
+        for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
+            GameObject obj = room.getObjectManager().getObjects().get(i);
+            if (!(obj instanceof PhysicalGameObject)) continue;
+            PhysicalGameObject pobj = (PhysicalGameObject) obj;
+
+            if (!obj.isSolid() && obj != tester && tester.getCollisionShape().isIntersecting(pobj.getCollisionShape()))
+            {
+                lastCollision = i;
+                return true;
+            }
+
+        }
+
+
+        return false;
+    }
 
     /**
      * 
