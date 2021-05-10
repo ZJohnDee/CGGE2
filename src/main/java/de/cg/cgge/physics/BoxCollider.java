@@ -17,7 +17,7 @@ public class BoxCollider extends Collider {
     }
 
     @Override
-    boolean checkSolidCollision(float x, float y, int w, int h) {
+    public boolean checkSolidCollision(float x, float y, int w, int h) {
 
         for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
             GameObject obj = room.getObjectManager().getObjects().get(i);
@@ -38,7 +38,7 @@ public class BoxCollider extends Collider {
     }
 
     @Override
-    boolean checkCollision(float x, float y, int w, int h) {
+    public boolean checkCollision(float x, float y, int w, int h) {
         for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
             GameObject obj = room.getObjectManager().getObjects().get(i);
 
@@ -59,7 +59,7 @@ public class BoxCollider extends Collider {
     }
 
     @Override
-    boolean checkUnsolidCollision(int x, int y, int w, int h) {
+    public boolean checkUnsolidCollision(int x, int y, int w, int h) {
         for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
             GameObject obj = room.getObjectManager().getObjects().get(i);
 
