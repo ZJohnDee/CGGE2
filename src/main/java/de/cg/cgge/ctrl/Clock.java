@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import de.cg.cgge.game.GameInstance;
 import de.cg.cgge.game.GameObject;
+import de.cg.cgge.game.PhysicalGameObject;
 
 public class Clock extends Thread {
 
@@ -82,6 +83,9 @@ public class Clock extends Thread {
 
         for (GameObject obj : objects) {
             obj.step();
+            //Physics objects will automatically get their physics updated
+            if (!(obj instanceof PhysicalGameObject)) return;
+            ((PhysicalGameObject) obj).updatePhysics();
         }
         
 

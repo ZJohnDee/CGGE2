@@ -21,7 +21,7 @@ public class GameObject {
 
     protected Room room; 
 
-    private ArrayList<Physics> physics = new ArrayList<>(0);
+
 
     /**
      * Creates a GameObject, important for logic and drawing
@@ -162,26 +162,7 @@ public class GameObject {
         return this.room;
     }
 
-    public ArrayList<Physics> getPhysics() {
-        return this.physics;
-    }
 
-
-    /**
-     * @param p A de.cg.cgge.physics.Physics instance.
-     */
-    public void addPhysics(Physics p) {
-        this.physics.add(p);
-    }
-
-    /**
-     * Call an update() method on all physics of the object
-     */
-    public void updatePhysics() {
-        for (Physics p : physics) {
-            p.update();
-        } 
-    }
 
     
 
