@@ -6,11 +6,16 @@ public class CollisionBoxShape extends CollisionShape {
 
     public CollisionBoxShape(int x, int y, int width, int height) {
         super(x, y);
+        this.width = width;
+        this.height = height;
     }
 
     @Override
     public boolean isIntersecting(CollisionBoxShape other) {
-        return (x >= other.getX() && y >= other.getY() && x <= other.getX()+ other.getWidth() && y <= other.getY()+ other.getHeight());
+        return (x+width >= other.getX()
+                && y+height >= other.getY()
+                && x <= other.getX()+ other.getWidth()
+                && y <= other.getY()+ other.getHeight());
     }
 
     public int getWidth() {
