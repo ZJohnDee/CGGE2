@@ -18,10 +18,21 @@ public abstract class CollisionShape {
     public boolean isIntersecting(CollisionShape other)
     {
         if (other instanceof CollisionBoxShape) return isIntersecting((CollisionBoxShape) other);
+        if (other instanceof CollisionCircleShape) return isIntersecting((CollisionCircleShape) other);
         return false;
     }
 
+    public CollisionShape getMovedInstance(float x, float y)
+    {
+        CollisionShape copy = copy();
+        copy.x += x;
+        copy.y += y;
+        return copy;
+    }
+
     protected abstract boolean isIntersecting(CollisionBoxShape other);
+    protected abstract boolean isIntersecting(CollisionCircleShape other);
+    protected abstract CollisionShape copy();
 
     public float getX() {
         return x;

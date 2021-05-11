@@ -27,14 +27,14 @@ public class Collider {
         Checks for collision with objects that are solid
         @return Whether there is a collision or not
     */
-    public boolean checkSolidCollision() {
+    public boolean checkSolidCollision(CollisionShape shape) {
 
         for (int i = 0; i<room.getObjectManager().getObjects().size(); i++) {
             GameObject obj = room.getObjectManager().getObjects().get(i);
             if (!(obj instanceof PhysicalGameObject)) continue;
             PhysicalGameObject pobj = (PhysicalGameObject) obj;
 
-            if (obj.isSolid() && obj != tester && tester.getCollisionShape().isIntersecting(pobj.getCollisionShape()))
+            if (obj.isSolid() && obj != tester && shape.isIntersecting(pobj.getCollisionShape()))
             {
                 lastCollision = i;
                 return true;

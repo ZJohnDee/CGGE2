@@ -1,10 +1,11 @@
 package de.cg.cgge.physics;
 
 import de.cg.cgge.game.GameObject;
+import de.cg.cgge.game.PhysicalGameObject;
 
 public class Gravity extends Physics {
 
-    private float force = 1.0f; 
+    private float force;
     private final float beginForce;
     private float acceleration = 1.0f; 
 
@@ -18,7 +19,7 @@ public class Gravity extends Physics {
      * @param force The velocity at which the object is pulled down
      * @param mover The mover of the object, that HAS to be included to the object's physics
      */
-    public Gravity(GameObject obj, float force, Mover mover) {
+    public Gravity(PhysicalGameObject obj, float force, Mover mover) {
         super(obj);
 
         this.force = force; 
@@ -26,7 +27,7 @@ public class Gravity extends Physics {
 
         this.mover = mover; 
         mover.setYacceleration(1.0f);
-        this.collider = new BoxCollider(obj.getRoom(), obj);
+        this.collider = new Collider(obj.getRoom(), obj);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class Gravity extends Physics {
         mover.setYspeed(mover.getYspeed()+force);
 
         force*=acceleration; 
-        if (collider.checkSolidCollision(obj.getX(), obj.getY()+1, obj.getWidth(), obj.getHeight())
+        if (collider.checkSolidCollision(obj.getCollisionShape())
         || mover.getYspeed() > 0) {
             force = beginForce; 
         }

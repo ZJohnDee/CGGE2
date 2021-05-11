@@ -2,12 +2,13 @@ package de.cg.cgge.physics;
 
 import de.cg.cgge.game.GameInstance;
 import de.cg.cgge.game.GameObject;
+import de.cg.cgge.game.PhysicalGameObject;
 
 public abstract class Physics {
 
-    protected GameObject obj; 
+    protected PhysicalGameObject obj;
 
-    public Physics(GameObject obj) {
+    public Physics(PhysicalGameObject obj) {
         this.obj = obj; 
     }
 

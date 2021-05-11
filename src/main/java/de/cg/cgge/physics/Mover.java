@@ -1,6 +1,7 @@
 package de.cg.cgge.physics;
 
 import de.cg.cgge.game.GameObject;
+import de.cg.cgge.game.PhysicalGameObject;
 
 public class Mover extends Physics {
 
@@ -20,9 +21,9 @@ public class Mover extends Physics {
      * If it detects a collision, it'll reset the objects position to the edge of the colliding object
      * @param obj The object to be moved
      */
-    public Mover(GameObject obj) {
+    public Mover(PhysicalGameObject obj) {
         super(obj);
-        col = new BoxCollider(obj.getRoom(), obj);
+        col = new Collider(obj.getRoom(), obj);
     }
 
     @Override
@@ -33,7 +34,7 @@ public class Mover extends Physics {
 
         onGround = false; 
 
-        if (xspeed != 0 && col.checkSolidCollision(x+ (int)xspeed, y, obj.getWidth(), obj.getHeight())) {
+        if (xspeed != 0 && col.checkSolidCollision(obj.getCollisionShape())) { //TODO: Add the xspeed to the x coords of the collision shape
             GameObject lastCollision = col.getLastCollision();
             
             if (xspeed > 0 ) {
@@ -47,7 +48,7 @@ public class Mover extends Physics {
             x += xspeed; 
         }
 
-        if (yspeed != 0 && col.checkSolidCollision(x, y + (int) yspeed, obj.getWidth(), obj.getHeight())) {
+        if (yspeed != 0 && col.checkSolidCollision(obj.getCollisionShape())) { //TODO: Add the yspeed to the y coords of the collision shape
             GameObject lastCollision = col.getLastCollision();
             
             if (yspeed > 0 ) {
@@ -113,8 +114,8 @@ public class Mover extends Physics {
      * @param speed The speed at which the object goes to the position. It's split between the distances in x and y directions
      */
     public void goToLocation(int x, int y, float speed) {
-        float cx = obj.getX()+obj.getWidth()/2; 
-        float cy = obj.getY()+obj.getHeight()/2; 
+        float cx = obj.getX()+(float)obj.getWidth()/2;
+        float cy = obj.getY()+(float)obj.getHeight()/2;
 
         if (!(cx == x || cy == y)) {
             float dx = x-cx; 
